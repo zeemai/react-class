@@ -1,25 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from "react";
+import AddEmployeeForm from "./AddEmployeeForm";
+import Table from "./Table";
+import Timer from "./Timer";
+import TodoApp from "./TodoApp";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  tableData = [
+    {
+      Name: "Sushree",
+      Profession: "Developer",
+    },
+    {
+      Name: "Binay",
+      Profession: "Trainer",
+    },
+    {
+      Name: "Tinu",
+      Profession: "Student",
+    },
+  ];
+  state = {
+    tableData: this.tableData,
+  };
+
+  handleDeleteOnClick = (index) => {
+    this.setState({
+      tableData: this.state.tableData.filter((emp, i) => i !== index),
+    });
+  };
+
+  handleAddEmployee = (emp) => {
+    //emp.preventDefault(); not sure why preventdefault here breaks this so i had to comment
+    console.log(emp);
+    this.setState({
+      tableData: [...this.state.tableData, emp],
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        Welcome you all to first react demo app
+        <Table
+          tableData={this.state.tableData}
+          handleDeleteOnClick={this.handleDeleteOnClick}
+        />
+        Add an employee to the database
+        <AddEmployeeForm handleAddEmployee={this.handleAddEmployee} />
+        <br />
+        <Timer />
+        <br />
+        <TodoApp />
+      </div>
+    );
+  }
 }
 
 export default App;
