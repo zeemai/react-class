@@ -13,8 +13,14 @@ class TodoApp extends Component {
 
   handleNewItemSubmit = (e) => {
     e.preventDefault();
+    //if (this.state.currentItem.trim().length === 0) return;
     if (this.state.currentItem.length === 0) return;
-    this.setState({ items: this.state.items.concat(this.state.currentItem) });
+
+    //this.setState({ items: [...this.state.items, this.state.currentItem] });
+    this.setState({
+      items: this.state.items.concat(this.state.currentItem),
+      currentItem: "",
+    });
   };
   render() {
     return (
@@ -22,10 +28,11 @@ class TodoApp extends Component {
         <form onSubmit={this.handleNewItemSubmit}>
           <label>Type in what you need to do next?</label>
           <input
+            placeholder="Task..."
             value={this.state.currentItem}
             onChange={this.handleOnChnage}
           />
-          <button>Add item: {this.state.items.length + 1}</button>
+          <button>Add item #{this.state.items.length + 1}</button>
         </form>
         <TodoList items={this.state.items} />
       </div>

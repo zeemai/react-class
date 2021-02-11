@@ -2,12 +2,14 @@ import { Component } from "react";
 
 class TodoList extends Component {
   render() {
+    const { items } = this.props;
+
     return (
-      <ul>
-        {this.props.items.map((item) => (
+      <ol>
+        {items.map((item) => (
           <li>{item}</li>
         ))}
-      </ul>
+      </ol>
     );
   }
 }

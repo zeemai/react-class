@@ -17,6 +17,7 @@ class Timer extends Component {
   componentWillUnmount = () => {
     clearInterval(this.interval);
   };
+
   render() {
     return <div>Seconds: {this.state.seconds}</div>;
   }
